@@ -1,26 +1,31 @@
 #!/bin/bash -e
 
-VERSION=5.6.23
-
-# Preconfiguration setup
-sudo apt-get install -y cmake libncurses5-dev
+echo "================= setting MySQL preReqs ==================="
 sudo groupadd mysql
 sudo useradd -g mysql mysql
-sudo chmod 1777 /tmp
+apt-get install libaio1
+mkdir -p /etc/mysql
+mkdir /var/log/mysql
 
-# Install MySQL 5.6
-sudo wget http://downloads.mysql.com/archives/get/file/mysql-$VERSION.tar.gz
-sudo tar xzf mysql-$VERSION.tar.gz && sudo rm -f mysql-$VERSION.tar.gz
-cd mysql-$VERSION
-sudo cmake .
-sudo make && sudo make install
+echo "=========== Downloading mysql 5.6 ==============="
+cd /usr/local
+wget -O mysql-5.6.26-linux-glibc2.5-x86_64.tar.gz https://downloads.mariadb.com/archives/mysql-5.6/mysql-5.6.26-linux-glibc2.5-x86_64.tar.gz
+tar xvfz mysql-5.6.26-linux-glibc2.5-x86_64.tar.gz
+mv mysql-5.6.26-linux-glibc2.5-x86_64 mysql
+rm mysql-5.6.26-linux-glibc2.5-x86_64.tar.gz
+cd mysql
+chown -R mysql .
+chgrp -R mysql .
 
-# Postinstallation setup
-cd /usr/local/mysql
-sudo chown -R mysql .
-sudo chgrp -R mysql .
-sudo scripts/mysql_install_db --user=mysql
-sudo chown -R root .
-sudo chown -R mysql data
-sudo cp support-files/mysql.server /etc/init.d/mysql
-echo 'export PATH=$PATH:/usr/local/mysql/bin' >> $HOME/.bashrc
+echo "================= Configuring MySQL ==================="
+scripts/mysql_install_db --user=mysql
+chown -R root .
+chown -R mysql data
+cp support-files/mysql.server /etc/init.d/mysql.server
+
+echo "=========== Installing mysql clients 5.6 ==============="
+add-apt-repository -y ppa:ondrej/mysql-5.6
+apt-get update
+apt-get install mysql-client-5.6
+
+ln -sf /usr/local/mysql/bin/mysqld_safe /usr/bin/mysqld_safe
