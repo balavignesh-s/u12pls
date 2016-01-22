@@ -3,6 +3,9 @@
 mkdir -p /tmp
 chmod 1777 /tmp
 
+apt-get update
+apt-get install -y expect
+
 for file in /u12pls/version/*;
 do
   . $file

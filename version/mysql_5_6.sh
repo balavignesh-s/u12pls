@@ -25,10 +25,10 @@ cp support-files/mysql.server /etc/init.d/mysql.server
 
 echo "=========== Installing mysql clients 5.6 ==============="
 wget http://repo.mysql.com/mysql-apt-config_0.3.3-1ubuntu12.04_all.deb -P /u12pls/mysqlClient
-apt-get install expect
-. /u12pls/mysqlClient/installMySQLClient.sh
+cd /u12pls/mysqlClient/
+./installMySQLClient.sh
 apt-get update
 apt-get install mysql-client
-rm mysql-apt-config_0.3.3-1ubuntu12.04_all.deb
+rm /u12pls/mysqlClient/mysql-apt-config_0.3.3-1ubuntu12.04_all.deb
 
 ln -sf /usr/local/mysql/bin/mysqld_safe /usr/bin/mysqld_safe
