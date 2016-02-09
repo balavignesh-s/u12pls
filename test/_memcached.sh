@@ -19,7 +19,7 @@ stop_service() {
   sudo su -c "killall memcached";
 }
 
-source /u14pls/test/function_start_generic.sh
+source /u12pls/test/function_start_generic.sh
 #
 # Call to start service
 #
