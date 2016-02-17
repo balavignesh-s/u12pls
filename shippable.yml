@@ -31,5 +31,5 @@ build:
 
   integrations:
     hub:
-      - integrationName: "myDocker"
+      - integrationName: "dockerhub"
         type: "docker"
