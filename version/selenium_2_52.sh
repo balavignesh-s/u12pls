@@ -30,6 +30,9 @@ sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 sudo apt-get install -y -f
 sudo rm -f google-chrome-stable_current_amd64.deb
+#the ppa for google-chrome is broken at the point when the following line was
+#written. Re enable it when google fixes it.
+sudo rm -f /etc/apt/sources.list.d/google-chrome.list
 
 echo "================= Installing Chrome driver ==================="
 sudo wget http://chromedriver.storage.googleapis.com/2.13/chromedriver_linux64.zip
@@ -40,10 +43,6 @@ sudo chmod a+x /usr/local/bin/chromedriver
 sudo apt-get install firefox chromium-browser;
 sudo ln -s /usr/bin/chromium-browser /usr/bin/chrome;
 sudo apt-get -f install;
-
-wget -q -O- https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-sudo apt-get update
-sudo apt-get install google-chrome-stable
 
 echo "================= Installing Opera ==================="
 wget -q -O-  http://deb.opera.com/archive.key | sudo apt-key add -
