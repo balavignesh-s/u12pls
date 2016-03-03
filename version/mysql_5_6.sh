@@ -32,4 +32,3 @@ apt-get install mysql-client
 rm /u12pls/mysqlClient/mysql-apt-config_0.3.3-1ubuntu12.04_all.deb
 
 ln -sf /usr/local/mysql/bin/mysqld_safe /usr/bin/mysqld_safe
-export PATH=$PATH:/usr/local/mysql/bin/
